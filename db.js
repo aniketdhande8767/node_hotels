@@ -1,7 +1,9 @@
- const mongoose = require('mongoose');
+const mongoose = require('mongoose');
+require('dotenv').config();
 
- const mongoURL = 'mongodb://localhost:27017/hotels'
 
+//  const mongoURL = process.env.MONGODB_URL_LOCAL;
+const mongoURL = process.env.MONGODB_URL;
 //  mongoose.connect(mongoURL,{
 //     useNewUrlParser: true,
 //     useUnifiedTopology: true
@@ -9,17 +11,17 @@
 
 // const mongoose = require("mongoose");
 
-mongoose.connect("mongodb://127.0.0.1:27017/mydb")
-.then(()=>{
-    console.log("MongoDB connected");
-})
-.catch((err)=>{
-    console.log("error.. to the mongodb server", err);
-});
+mongoose.connect(mongoURL)
+    .then(() => {
+        console.log("MongoDB connected");
+    })
+    .catch((err) => {
+        console.log("error.. to the mongodb server", err);
+    });
 
 
 
- const db = mongoose.connection;
+const db = mongoose.connection;
 //  db.on('connected',()=>{
 //     console.log('connected to the mongodb server')
 //  })
@@ -31,4 +33,4 @@ mongoose.connect("mongodb://127.0.0.1:27017/mydb")
 //     console.log('disconnected to the mongodb server')
 //  })
 
- module.exports = db;
+module.exports = db;
